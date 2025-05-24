@@ -70,5 +70,11 @@
       document.getElementById("ok").style.display = "block";
     }
   </script>
+    <script>
+  if (!localStorage.getItem("token")) {
+    localStorage.setItem("token", "demo_token_123");
+  }
+</script>
+
 </body>
 </html>
